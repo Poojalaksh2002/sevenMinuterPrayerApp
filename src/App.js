@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CallingLord from "./components/CallingLord";
 import Praying from "./components/Praying";
@@ -163,6 +164,7 @@ function App() {
               />
             }
           />
+
           <Route path="/end" element={<End />} />
         </Routes>
       </div>
@@ -171,3 +173,4 @@ function App() {
 }
 
 export default App;
+// export NODE_OPTIONS=--openssl-legacy-provider
