@@ -38,3 +38,4 @@ const Praying = (props) => {
 };
 
 export default Praying;
+

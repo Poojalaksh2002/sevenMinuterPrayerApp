@@ -1,10 +1,12 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import End from "./End";
 
 const Petition = () => {
+  const initalDuration = 60;
   const navigate = useNavigate();
-  const [count, setCount] = useState(60);
+  const [count, setCount] = useState(initalDuration);
   const [isPaused, setIsPaused] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
 
@@ -29,8 +31,9 @@ const Petition = () => {
     navigate("/thanksgiving");
   };
   const handleExist = () => {
+    const remainingDuration = Math.floor(initalDuration / 60);
     alert(
-      `[Jesus] said...'So were you not able to watch with Me for [more minutes]? Watch and pray that you may not enter into temptation.The spirit is willing, but the flesh is weak.'(Matt.26:40b-41)`
+      `[Jesus] said...'So were you not able to watch with Me for [${remainingDuration} more minutes]? Watch and pray that you may not enter into temptation.The spirit is willing, but the flesh is weak.'(Matt.26:40b-41)`
     );
   };
 
@@ -41,8 +44,8 @@ const Petition = () => {
           <div>
             <h1>Petition</h1>
             <p>
-              Using our exercised spirit to pray over a verse or two. Turning
-              the verses into a personal prayer - Eph.6:17-18;2 Tim.3:16
+              Asking the Lord for needs,growth and persons that need salvation -
+              1 Tim.2:1:Eph.6:18;Matt.7:7; Psa.143:8
             </p>
           </div>
           <div>
@@ -62,3 +65,4 @@ const Petition = () => {
 };
 
 export default Petition;
+

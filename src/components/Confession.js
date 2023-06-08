@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import Consecration from "./Consecration";
 
@@ -25,7 +26,7 @@ const Confession = (props) => {
             <div>{props.count}</div>
             <button onClick={handleReset}>Back</button>
             <button onClick={handlePause}>
-              {isPaused ? "Continue" : "Pause"}
+              {props.isPaused ? "Continue" : "Pause"}
             </button>
             <button>Exit</button>
           </div>
@@ -38,3 +39,4 @@ const Confession = (props) => {
 };
 
 export default Confession;
+

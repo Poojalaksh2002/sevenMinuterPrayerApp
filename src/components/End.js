@@ -1,7 +1,10 @@
+
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const End = () => {
   const navigate = useNavigate();
+
   const handleRestart = () => {
     navigate("/");
   };

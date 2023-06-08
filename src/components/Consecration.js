@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ThanksGiving from "./ThanksGiving";
@@ -57,3 +58,5 @@ const Consecration = () => {
 };
 
 export default Consecration;
+
+ 
