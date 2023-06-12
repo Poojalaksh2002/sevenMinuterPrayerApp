@@ -1,29 +1,36 @@
-import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Petition from "./Petition";
+import React, { useEffect } from "react";
 
-const ThanksGiving = () => {
+const ThanksGiving = (props) => {
   const navigate = useNavigate();
-  const [count, setCount] = useState(30);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
+  const {
+    handlingExit,
+    allCount,
+    setRemainingDuration,
+    count,
+    isPaused,
+    isCompleted,
+    handlePause,
+    setIsCompleted,
+  } = props;
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (!isPaused && count >= 0) setCount((prevCount) => prevCount - 1);
-    }, 1000);
+    const total_duration = allCount.thanksgiving + allCount.petition;
+    console.log(total_duration);
+    const remaining_minutes = (total_duration / 60).toFixed(1);
+
+    // const remaining_minutes = Math.floor(total_duration / 60);
+    console.log(remaining_minutes);
+    setRemainingDuration(remaining_minutes);
+  }, []);
+  useEffect(() => {
     if (count === 0) {
+      navigate("/petition");
       setIsCompleted(true);
     }
+  }, [count]);
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [count, isPaused]);
-
-  const handlePause = () => {
-    setIsPaused((prevPause) => !prevPause);
-  };
   const handleReset = () => {
     setIsCompleted(false);
     navigate("/consecration");
@@ -32,29 +39,39 @@ const ThanksGiving = () => {
   return (
     <div>
       {!isCompleted ? (
-        <div>
-          <div>
-            <h1>ThanksGiving</h1>
-            <p>
-              Using our exercised spirit to pray over a verse or two. Turning
-              the verses into a personal prayer - Eph.6:17-18;2 Tim.3:16
-            </p>
-          </div>
-          <div>
-            <div>{count}</div>
-            <button onClick={handleReset}>Back</button>
-            <button onClick={handlePause}>
-              {isPaused ? "Continue" : "Pause"}
-            </button>
-            <button>Exit</button>
+        <div className="text-container">
+          <div className="flex-container">
+            <div>
+              <h1>ThanksGiving</h1>
+              <p>
+                Giving thanks for all things; for all the persons, situations
+                and things in your life and praising Him -Eph.5:20; 1 Thes.5:18
+              </p>
+            </div>
+
+            <div>
+              <h4 className="count">{count}</h4>
+            </div>
+
+            <div>
+              <div className="home-buttons">
+                <button onClick={handleReset}>Back</button>
+                <button onClick={handlePause}>
+                  {isPaused ? "Continue" : "Pause"}
+                </button>
+                <button className="exit" onClick={handlingExit}>
+                  Exit
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       ) : (
         <Petition />
       )}
+      <div />
     </div>
   );
 };
 
 export default ThanksGiving;
-
