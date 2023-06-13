@@ -11,38 +11,36 @@ const CallingLord = (props) => {
     handlePause,
     setIsCompleted,
     setCount,
-    // handlingExit,
+    handlingExit,
     setRemainingDuration,
   } = props;
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (props.count === 1) {
-      navigate("/praying");
-      setIsCompleted(true);
-    }
-  }, [count]);
+    let total_duration =
+      allCount.callingLordCount +
+      allCount.prayingCount +
+      allCount.readingCount +
+      allCount.confessionCount +
+      allCount.consecrationCount +
+      allCount.thanksgivingCount +
+      allCount.petitionCount;
+    console.log(total_duration);
+    const remaining_minutes = Math.floor(total_duration / 60);
 
+    console.log(remaining_minutes);
+    setRemainingDuration(remaining_minutes);
+  }, []);
   const handleReset = () => {
     setCount({ callingLord: 30 });
     setIsCompleted(false);
   };
-  // useEffect(() => {
-  //   let total_duration =
-  //     allCount.callingLordCount +
-  //     allCount.prayingCount +
-  //     allCount.readingCount +
-  //     allCount.confessionCount +
-  //     allCount.consecrationCount +
-  //     allCount.thanksgivingCount +
-  //     allCount.petitionCount;
-  //   console.log(total_duration);
-  //   const remaining_minutes = Math.floor(total_duration / 60);
 
-  //   console.log(remaining_minutes);
-  //   setRemainingDuration(remaining_minutes);
-  // }, []);
+  if (props.count === 0) {
+    navigate("/praying");
+    // setIsCompleted(true);
+  }
 
   return (
     <div>
@@ -67,13 +65,15 @@ const CallingLord = (props) => {
                 <button onClick={handlePause}>
                   {props.isPaused ? "Continue" : "Pause"}
                 </button>
-                <button className="exit">Exit</button>
+                <button className="exit" onClick={handlingExit}>
+                  Exit
+                </button>
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <Praying />
+        isCompleted && <Praying />
       )}
       <div />
     </div>

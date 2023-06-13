@@ -3,6 +3,7 @@ import End from "./End";
 import React, { useEffect } from "react";
 
 const Petition = (props) => {
+  console.log(props);
   const navigate = useNavigate();
   const {
     handlingExit,
@@ -15,7 +16,7 @@ const Petition = (props) => {
     setIsCompleted,
   } = props;
   useEffect(() => {
-    const total_duration = allCount.petition;
+    const total_duration = allCount.petitionCount;
     console.log(total_duration);
     const remaining_minutes = Math.floor(total_duration / 60);
     // const remaining_minutes = (total_duration / 60).toFixed(1);
@@ -28,12 +29,10 @@ const Petition = (props) => {
     setIsCompleted(false);
     navigate("/thanksgiving");
   };
-  useEffect(() => {
-    if (count === 0) {
-      navigate("/end");
-      setIsCompleted(true);
-    }
-  }, [count]);
+  if (count === 0) {
+    navigate("/end");
+    setIsCompleted(true);
+  }
 
   return (
     <div>

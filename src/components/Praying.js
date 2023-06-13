@@ -3,6 +3,7 @@ import Reading from "./Reading";
 import React, { useEffect } from "react";
 
 const Praying = (props) => {
+  console.log(props);
   const navigate = useNavigate();
   const {
     count,
@@ -16,13 +17,14 @@ const Praying = (props) => {
   } = props;
 
   useEffect(() => {
-    let total_duration_praying =
+    const total_duration_praying =
       props.allCount.prayingCount +
       props.allCount.readingCount +
       props.allCount.confessionCount +
       props.allCount.consecrationCount +
       props.allCount.thanksgivingCount +
       props.allCount.petitionCount;
+    console.log(props.allCount.prayingCount);
     console.log(total_duration_praying);
     // const remaining_minutes = Math.floor(total_duration / 60);
     const remaining_minutes = (total_duration_praying / 60).toFixed(1);
@@ -30,17 +32,15 @@ const Praying = (props) => {
     console.log(remaining_minutes);
     setRemainingDuration(remaining_minutes);
   }, []);
-  useEffect(() => {
-    if (count === 1) {
-      navigate("/prayreading");
-      setIsCompleted(true);
-    }
-  }, [count]);
 
   const handleResetTwo = () => {
     setIsCompleted(false);
     navigate("/");
   };
+  if (count === 0) {
+    navigate("/prayreading");
+    // setIsCompleted(true);
+  }
 
   return (
     <div>
@@ -65,7 +65,9 @@ const Praying = (props) => {
                 <button onClick={handlePause}>
                   {isPaused ? "Continue" : "Pause"}
                 </button>
-                <button className="exit">Exit</button>
+                <button className="exit" onClick={handlingExit}>
+                  Exit
+                </button>
               </div>
             </div>
           </div>

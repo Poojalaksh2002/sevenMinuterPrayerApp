@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 import Confession from "./Confession";
 
 const Reading = (props) => {
+  console.log(props);
+
   const navigate = useNavigate();
   const {
     handlingExit,
@@ -18,11 +20,11 @@ const Reading = (props) => {
 
   useEffect(() => {
     const totalDurationReading =
-      props.allCount.readingCount +
-      props.allCount.confessionCount +
-      props.allCount.consecrationCount +
-      props.allCount.thanksgivingCount +
-      props.allCount.petitionCount;
+      allCount.readingCount +
+      allCount.confessionCount +
+      allCount.consecrationCount +
+      allCount.thanksgivingCount +
+      allCount.petitionCount;
     console.log(totalDurationReading);
     console.log(props.allCount.readingCount);
     // const remaining_minutes = Math.floor(total_duration / 60);
@@ -36,12 +38,14 @@ const Reading = (props) => {
     setIsCompleted(false);
     navigate("/praying");
   };
-  useEffect(() => {
-    if (props.count === 1) {
-      navigate("/confession");
-      setIsCompleted(true);
-    }
-  }, [count]);
+  // if (count === 0 || setIsCompleted(true)) {
+  //   navigate("/confession");
+  // }
+
+  if (count === 0) {
+    navigate("/confession");
+    // setIsCompleted(true);
+  }
 
   return (
     <div>

@@ -3,6 +3,7 @@ import Petition from "./Petition";
 import React, { useEffect } from "react";
 
 const ThanksGiving = (props) => {
+  console.log(props);
   const navigate = useNavigate();
   const {
     handlingExit,
@@ -16,7 +17,8 @@ const ThanksGiving = (props) => {
   } = props;
 
   useEffect(() => {
-    const total_duration = allCount.thanksgiving + allCount.petition;
+    const total_duration =
+      props.allCount.thanksgivingCount + props.allCount.petitionCount;
     console.log(total_duration);
     const remaining_minutes = (total_duration / 60).toFixed(1);
 
@@ -24,17 +26,15 @@ const ThanksGiving = (props) => {
     console.log(remaining_minutes);
     setRemainingDuration(remaining_minutes);
   }, []);
-  useEffect(() => {
-    if (count === 0) {
-      navigate("/petition");
-      setIsCompleted(true);
-    }
-  }, [count]);
 
   const handleReset = () => {
     setIsCompleted(false);
     navigate("/consecration");
   };
+  if (count === 0) {
+    navigate("/petition");
+    // setIsCompleted(true);
+  }
 
   return (
     <div>

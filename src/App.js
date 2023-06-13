@@ -23,7 +23,7 @@ function App() {
   const [isPaused, setIsPaused] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isExist, setIsExist] = useState(false);
-  const [remainingDuration, setRemainingDuration] = useState(0);
+  const [remainingDuration, setRemainingDuration] = useState("");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -131,7 +131,14 @@ function App() {
             path="/praying"
             element={
               <Praying
-                allCount={initial_count}
+                allCount={{
+                  prayingCount: 60,
+                  readingCount: 150,
+                  confessionCount: 60,
+                  consecrationCount: 30,
+                  thanksgivingCount: 30,
+                  petitionCount: 60,
+                }}
                 setRemainingDuration={setRemainingDuration}
                 count={count.praying}
                 isCompleted={isCompleted}
@@ -163,6 +170,7 @@ function App() {
                 isPaused={isPaused}
                 handlePause={handlePause}
                 setIsCompleted={setIsCompleted}
+                isExist={isExist}
               />
             }
           />
@@ -178,11 +186,13 @@ function App() {
                 }}
                 setRemainingDuration={setRemainingDuration}
                 handlingExit={handlingExit}
-                count={count.confession}
+                {...{ count: count.confession }}
+                // count={count.confession}
                 isCompleted={isCompleted}
                 isPaused={isPaused}
                 handlePause={handlePause}
                 setIsCompleted={setIsCompleted}
+                isExist={isExist}
               />
             }
           />
@@ -190,7 +200,11 @@ function App() {
             path="/consecration"
             element={
               <Consecration
-                allCount={initial_count}
+                allCount={{
+                  consecrationCount: 30,
+                  thanksgivingCount: 30,
+                  petitionCount: 60,
+                }}
                 setRemainingDuration={setRemainingDuration}
                 handlingExit={handlingExit}
                 count={count.consecration}
@@ -205,7 +219,10 @@ function App() {
             path="/thanksgiving"
             element={
               <ThanksGiving
-                allCount={initial_count}
+                allCount={{
+                  thanksgivingCount: 30,
+                  petitionCount: 60,
+                }}
                 setRemainingDuration={setRemainingDuration}
                 handlingExit={handlingExit}
                 count={count.thanksgiving}
@@ -220,7 +237,9 @@ function App() {
             path="/petition"
             element={
               <Petition
-                allCount={initial_count}
+                allCount={{
+                  petitionCount: 60,
+                }}
                 setRemainingDuration={setRemainingDuration}
                 handlingExit={handlingExit}
                 count={count.petition}
@@ -231,13 +250,10 @@ function App() {
               />
             }
           />
-
           <Route path="/end" element={<End />} />
         </Routes>
       </div>
     </BrowserRouter>
   );
 }
-
 export default App;
-// export NODE_OPTIONS=--openssl-legacy-provider

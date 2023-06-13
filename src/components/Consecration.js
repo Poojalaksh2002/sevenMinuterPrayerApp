@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import ThanksGiving from "./ThanksGiving";
 
 const Consecration = (props) => {
+  console.log(props);
+
   const navigate = useNavigate();
   const {
     handlingExit,
@@ -14,15 +16,12 @@ const Consecration = (props) => {
     handlePause,
     setIsCompleted,
   } = props;
-  useEffect(() => {
-    if (props.count === 1) {
-      navigate("/thanksgiving");
-      setIsCompleted(true);
-    }
-  }, [count]);
+
   useEffect(() => {
     const total_duration =
-      allCount.consecration + allCount.thanksgiving + allCount.petition;
+      props.allCount.consecrationCount +
+      props.allCount.thanksgivingCount +
+      props.allCount.petitionCount;
     console.log(total_duration);
     const remaining_minutes = Math.floor(total_duration / 60);
     // const remaining_minutes = (total_duration / 60).toFixed(1);
@@ -36,9 +35,14 @@ const Consecration = (props) => {
     navigate("/confession");
   };
 
+  if (count === 0) {
+    navigate("/thanksgiving");
+    // setIsCompleted(true);
+  }
+
   return (
     <div>
-      {!isCompleted && (
+      {!isCompleted ? (
         <div className="text-container">
           <div className="flex-container">
             <div>
@@ -66,8 +70,9 @@ const Consecration = (props) => {
             </div>
           </div>
         </div>
+      ) : (
+        <ThanksGiving />
       )}
-      {isCompleted && <ThanksGiving />}
       <div />
     </div>
   );
